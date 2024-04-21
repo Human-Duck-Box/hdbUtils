@@ -26,6 +26,23 @@ public:
 	constexpr Vector(T s) {
 		for (unsigned int i = 0; i < rows; ++i) { this->data[i] = s; }
 	}
+	
+	constexpr Vector(std::initializer_list<T> args) {
+		unsigned int index = 0;
+		for (auto i: args) {
+			data[index++] = i;
+		}
+	}
+
+	template <typename... Args>
+	constexpr Vector(Args... args) {
+		auto init = std::initializer_list<T>{args...};
+
+		unsigned int index = 0;
+		for (auto i: init) {
+			data[index++] = i;
+		}
+	}
 
 	operatorVector(T, +);
 	operatorVector(T, -);
